@@ -1,4 +1,4 @@
-# 🚀 Guide de Démarrage Rapide
+# Guide de Démarrage Rapide
 
 Ce guide vous permet de démarrer rapidement avec l'analyse de logs web.
 
@@ -45,12 +45,12 @@ python main.py
 ```
 
 Cette commande exécute:
-- ✅ Parsing des logs
-- ✅ Analyses SQL et KPI
-- ✅ Détection d'anomalies ML
-- ✅ Analyse de graphe
-- ✅ Simulation streaming
-- ✅ Export pour Grafana
+- Parsing des logs
+- Analyses SQL et KPI
+- Détection d'anomalies ML
+- Analyse de graphe
+- Simulation streaming
+- Export pour Grafana
 
 **Durée:** 5-10 minutes (selon votre machine)
 
@@ -216,11 +216,11 @@ Puis décompresser dans `data/`
 
 ## Prochaines Étapes
 
-1. ✅ **Explorer les résultats** dans `output/parquet/`
-2. ✅ **Ouvrir le Notebook** pour l'analyse interactive
-3. ✅ **Configurer Grafana** pour la visualisation
-4. ✅ **Personnaliser** les analyses dans `src/`
-5. ✅ **Ajouter** vos propres KPI
+1. **Explorer les résultats** dans `output/parquet/`
+2. **Ouvrir le Notebook** pour l'analyse interactive
+3. **Configurer Grafana** pour la visualisation
+4. **Personnaliser** les analyses dans `src/`
+5. **Ajouter** vos propres KPI
 
 ## Support
 
@@ -231,13 +231,13 @@ Pour plus d'informations:
 
 ## Timeline Estimée
 
-- ⏱️ Installation: 5 min
-- ⏱️ Téléchargement données: 5-10 min
-- ⏱️ Première analyse: 5-10 min
-- ⏱️ Setup Grafana: 10 min (optionnel)
+- Installation: 5 min
+- Téléchargement données: 5-10 min
+- Première analyse: 5-10 min
+- Setup Grafana: 10 min (optionnel)
 
 **Total: ~30 minutes pour être opérationnel!**
 
 ---
 
-🎉 **Bon analyse!**
+**Bon analyse!**

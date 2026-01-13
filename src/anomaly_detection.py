@@ -46,7 +46,7 @@ class AnomalyDetector:
             'urls_per_request', col('unique_urls') / col('request_count')
         )
         
-        print("\n📊 FEATURES PRÉPARÉES POUR ML")
+        print("\nFEATURES PRÉPARÉES POUR ML")
         print("=" * 100)
         ip_features.describe().show()
         
@@ -93,7 +93,7 @@ class AnomalyDetector:
         pipeline = Pipeline(stages=[assembler, scaler, kmeans])
         
         # Entraîner le modèle
-        print(f"\n🤖 ENTRAÎNEMENT K-MEANS (k={k})")
+        print(f"\nENTRAÎNEMENT K-MEANS (k={k})")
         print("=" * 80)
         
         self.model = pipeline.fit(features_df)
@@ -104,7 +104,7 @@ class AnomalyDetector:
         kmeans_model = self.model.stages[-1]
         
         # Afficher les informations sur le modèle
-        print(f"\n✅ Modèle entraîné avec {k} clusters")
+        print(f"\nModèle entraîné avec {k} clusters")
         if isinstance(kmeans_model, KMeansModel) and hasattr(kmeans_model, 'summary'):
             print(f"Inertie: {kmeans_model.summary.trainingCost:.2f}")
         
@@ -140,7 +140,7 @@ class AnomalyDetector:
             when(col('anomaly_score') > threshold, 1).otherwise(0)
         )
         
-        print(f"\n🔍 ANOMALIES DÉTECTÉES (seuil: {threshold:.6f})")
+        print(f"\nANOMALIES DÉTECTÉES (seuil: {threshold:.6f})")
         print("=" * 100)
         
         anomalous_ips = anomalies.filter(col('is_anomaly') == 1) \
@@ -204,7 +204,7 @@ class AnomalyDetector:
             )
         )
         
-        print(f"\n📊 DÉTECTION STATISTIQUE D'ANOMALIES (seuil: {std_threshold} σ)")
+        print(f"\nDÉTECTION STATISTIQUE D'ANOMALIES (seuil: {std_threshold} σ)")
         print("=" * 100)
         
         anomalous = anomalies.filter(col('is_anomaly') == 1) \
@@ -229,7 +229,7 @@ class AnomalyDetector:
             .orderBy(F.desc('anomaly_score')) \
             .limit(top_n)
         
-        print(f"\n⚠️  TOP {top_n} IPs SUSPECTES")
+        print(f"\nTOP {top_n} IPs SUSPECTES")
         print("=" * 100)
         suspicious.show(top_n, truncate=False)
         
@@ -244,23 +244,23 @@ class AnomalyDetector:
         # Analyser leurs requêtes
         anomalous_requests = df.filter(col('ip').isin(anomalous_ips))
         
-        print(f"\n🔬 ANALYSE DÉTAILLÉE DES {len(anomalous_ips)} IPs ANORMALES")
+        print(f"\nANALYSE DÉTAILLÉE DES {len(anomalous_ips)} IPs ANORMALES")
         print("=" * 100)
         
         # URLs les plus visitées par les IPs anormales
-        print("\n📍 URLs les plus visitées par les IPs anormales:")
+        print("\nURLs les plus visitées par les IPs anormales:")
         anomalous_requests.groupBy('url').count() \
             .orderBy(F.desc('count')) \
             .show(10, truncate=False)
         
         # Distribution temporelle
-        print("\n⏰ Distribution temporelle des IPs anormales:")
+        print("\nDistribution temporelle des IPs anormales:")
         anomalous_requests.groupBy('hour').count() \
             .orderBy('hour') \
             .show(24)
         
         # Codes d'erreur
-        print("\n❌ Codes d'erreur des IPs anormales:")
+        print("\nCodes d'erreur des IPs anormales:")
         anomalous_requests.filter(col('is_error') == 1) \
             .groupBy('status').count() \
             .orderBy(F.desc('count')) \

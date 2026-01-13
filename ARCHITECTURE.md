@@ -1,4 +1,4 @@
-# 📐 Architecture Technique du Projet
+# Architecture Technique du Projet
 
 ## Vue d'Ensemble
 

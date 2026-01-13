@@ -6,7 +6,7 @@
 set -e  # Arrêter en cas d'erreur
 
 echo "================================"
-echo "🚀 LANCEMENT ANALYSE LOGS WEB"
+echo "LANCEMENT ANALYSE LOGS WEB"
 echo "================================"
 
 # Couleurs
@@ -17,15 +17,15 @@ NC='\033[0m' # No Color
 
 # Fonction pour afficher les messages
 print_success() {
-    echo -e "${GREEN}✅ $1${NC}"
+    echo -e "${GREEN}[OK] $1${NC}"
 }
 
 print_error() {
-    echo -e "${RED}❌ $1${NC}"
+    echo -e "${RED}[ERROR] $1${NC}"
 }
 
 print_info() {
-    echo -e "${YELLOW}ℹ️  $1${NC}"
+    echo -e "${YELLOW}[INFO] $1${NC}"
 }
 
 # 1. Vérifier Python
@@ -118,4 +118,4 @@ echo "  - Lancer Jupyter:          jupyter notebook notebooks/analysis.ipynb"
 echo "  - Voir ce guide:           cat QUICKSTART.md"
 
 echo ""
-print_success "Projet prêt à être exploré! 🎉"
+print_success "Projet prêt à être exploré!"

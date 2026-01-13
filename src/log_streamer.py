@@ -28,7 +28,7 @@ class LogStreamer:
         Returns:
             DataFrame en streaming
         """
-        print(f"\n🌊 CRÉATION DE LA SOURCE STREAMING")
+        print(f"\nCRÉATION DE LA SOURCE STREAMING")
         print(f"Répertoire surveillé: {source_dir}")
         print("=" * 100)
         
@@ -140,7 +140,7 @@ class LogStreamer:
             .trigger(processingTime="10 seconds") \
             .start()
         
-        print(f"\n✅ Query '{query_name}' démarrée")
+        print(f"\nQuery '{query_name}' démarrée")
         print(f"Checkpoint: {checkpoint_dir}/{query_name}")
         
         return query
@@ -170,7 +170,7 @@ class LogStreamer:
             .trigger(processingTime="10 seconds") \
             .start()
         
-        print(f"\n✅ Query '{query_name}' démarrée")
+        print(f"\nQuery '{query_name}' démarrée")
         print(f"Output: {output_path}")
         print(f"Checkpoint: {checkpoint_dir}/{query_name}")
         
@@ -196,7 +196,7 @@ class LogStreamer:
             .trigger(processingTime="10 seconds") \
             .start()
         
-        print(f"\n✅ Query '{query_name}' démarrée")
+        print(f"\nQuery '{query_name}' démarrée")
         print(f"Accessible via: spark.sql('SELECT * FROM {query_name}')")
         
         return query
@@ -209,7 +209,7 @@ class LogStreamer:
             query: StreamingQuery à monitorer
             duration_seconds: Durée de monitoring en secondes
         """
-        print(f"\n📊 MONITORING DE LA QUERY '{query.name}'")
+        print(f"\nMONITORING DE LA QUERY '{query.name}'")
         print(f"Durée: {duration_seconds} secondes")
         print("=" * 100)
         
@@ -228,24 +228,24 @@ class LogStreamer:
                     
                     time.sleep(10)
                 else:
-                    print("⚠️  Query arrêtée")
+                    print("Query arrêtée")
                     break
                     
         except KeyboardInterrupt:
-            print("\n⚠️  Monitoring interrompu par l'utilisateur")
+            print("\nMonitoring interrompu par l'utilisateur")
         
-        print(f"\n✅ Monitoring terminé")
+        print(f"\nMonitoring terminé")
     
     def stop_all_queries(self):
         """Arrêter toutes les queries streaming actives"""
         active_queries = self.spark.streams.active
         
         if active_queries:
-            print(f"\n🛑 Arrêt de {len(active_queries)} queries actives...")
+            print(f"\nArrêt de {len(active_queries)} queries actives...")
             for query in active_queries:
                 print(f"  - Arrêt de '{query.name}'")
                 query.stop()
-            print("✅ Toutes les queries sont arrêtées")
+            print("Toutes les queries sont arrêtées")
         else:
             print("\nℹ️  Aucune query active")
 
@@ -265,7 +265,7 @@ def prepare_streaming_data(source_file: str, stream_dir: str,
     import os
     import time
     
-    print(f"\n📦 PRÉPARATION DES DONNÉES POUR STREAMING")
+    print(f"\nPRÉPARATION DES DONNÉES POUR STREAMING")
     print(f"Source: {source_file}")
     print(f"Destination: {stream_dir}")
     print(f"Taille des chunks: {chunk_size} lignes")
@@ -300,9 +300,9 @@ def prepare_streaming_data(source_file: str, stream_dir: str,
         with open(chunk_file, 'w') as f:
             f.writelines(lines[start_idx:end_idx])
         
-        print(f"✅ Chunk {i+1}/{num_chunks} écrit: {chunk_file} ({end_idx - start_idx} lignes)")
+        print(f"Chunk {i+1}/{num_chunks} écrit: {chunk_file} ({end_idx - start_idx} lignes)")
         
         if i < num_chunks - 1:  # Ne pas attendre après le dernier chunk
             time.sleep(delay_seconds)
     
-    print(f"\n✅ Préparation terminée: {num_chunks} chunks créés")
+    print(f"\nPréparation terminée: {num_chunks} chunks créés")

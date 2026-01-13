@@ -56,7 +56,7 @@ class MetricsExporter:
     def start_server(self):
         """Démarrer le serveur HTTP Prometheus"""
         start_http_server(self.port)
-        print(f"✅ Serveur Prometheus démarré sur le port {self.port}")
+        print(f"Serveur Prometheus démarré sur le port {self.port}")
         print(f"   Métriques disponibles sur: http://localhost:{self.port}/metrics")
     
     def update_metrics_from_dataframe(self, df: DataFrame):
@@ -137,7 +137,7 @@ def export_to_json(df: DataFrame, output_path: str, metric_name: str):
     
     # Écrire le nouveau JSON
     df.write.mode('overwrite').json(json_dir)
-    print(f"✅ Exporté: {json_dir}")
+    print(f"Exporté: {json_dir}")
 
 
 def export_to_csv(df: DataFrame, output_path: str, metric_name: str):
@@ -182,7 +182,7 @@ def export_to_csv(df: DataFrame, output_path: str, metric_name: str):
     # Nettoyer le répertoire temporaire
     shutil.rmtree(temp_dir, ignore_errors=True)
     
-    print(f"✅ Exporté: {csv_file}")
+    print(f"Exporté: {csv_file}")
 
 
 def generate_grafana_metrics(kpis: Dict[str, DataFrame], output_dir: str):
@@ -193,7 +193,7 @@ def generate_grafana_metrics(kpis: Dict[str, DataFrame], output_dir: str):
         kpis: Dictionnaire de KPI DataFrames
         output_dir: Répertoire de sortie
     """
-    print("\n📊 EXPORT DES MÉTRIQUES POUR GRAFANA")
+    print("\nEXPORT DES MÉTRIQUES POUR GRAFANA")
     print("=" * 100)
     
     import os
@@ -213,8 +213,8 @@ def generate_grafana_metrics(kpis: Dict[str, DataFrame], output_dir: str):
             export_to_json(df, json_dir, name)
             export_to_csv(df, csv_dir, name)
         except Exception as e:
-            print(f"❌ Erreur lors de l'export de {name}: {e}")
+            print(f"Erreur lors de l'export de {name}: {e}")
     
-    print(f"\n✅ Tous les exports terminés")
+    print(f"\nTous les exports terminés")
     print(f"   JSON: {json_dir}")
     print(f"   CSV: {csv_dir}")

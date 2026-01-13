@@ -32,7 +32,7 @@ def main():
     args = parser.parse_args()
     
     print("=" * 100)
-    print("🚀 ANALYSE DE LOGS WEB AVEC APACHE SPARK")
+    print("ANALYSE DE LOGS WEB AVEC APACHE SPARK")
     print("=" * 100)
     print(f"Mode: {args.mode}")
     print(f"Fichier: {args.data}")
@@ -52,18 +52,18 @@ def main():
         run_prometheus_export(spark, args)
     
     print("\n" + "=" * 100)
-    print("✅ ANALYSE TERMINÉE")
+    print("ANALYSE TERMINÉE")
     print("=" * 100)
     
     # Garder Spark actif pour Prometheus
     if args.export_prometheus:
-        print("\n⏳ Serveur Prometheus actif. Appuyez sur Ctrl+C pour arrêter...")
+        print("\nServeur Prometheus actif. Appuyez sur Ctrl+C pour arrêter...")
         try:
             import time
             while True:
                 time.sleep(10)
         except KeyboardInterrupt:
-            print("\n🛑 Arrêt du serveur...")
+            print("\nArrêt du serveur...")
     
     spark.stop()
 
@@ -72,7 +72,7 @@ def run_batch_analysis(spark, args):
     """Exécuter l'analyse batch complète"""
     
     print("\n" + "=" * 100)
-    print("📊 ANALYSE BATCH")
+    print("ANALYSE BATCH")
     print("=" * 100)
     
     # 1. PARSING
@@ -90,7 +90,7 @@ def run_batch_analysis(spark, args):
     kpis = analytics.generate_all_kpis(logs_df)
     
     # Sauvegarder les KPI en Parquet
-    print("\n💾 Sauvegarde des KPI en Parquet...")
+    print("\nSauvegarde des KPI en Parquet...")
     analytics.save_kpis_to_parquet(kpis, f"{args.output}/parquet")
     
     # 3. DÉTECTION D'ANOMALIES
@@ -110,7 +110,7 @@ def run_batch_analysis(spark, args):
     detector.analyze_anomalous_behavior(logs_df, anomalies_kmeans)
     
     # Sauvegarder les anomalies
-    print("\n💾 Sauvegarde des anomalies...")
+    print("\nSauvegarde des anomalies...")
     suspicious_ips.write.mode('overwrite').parquet(f"{args.output}/parquet/suspicious_ips")
     
     # 4. ANALYSE DE GRAPHE
@@ -133,7 +133,7 @@ def run_batch_analysis(spark, args):
     suspicious_patterns = graph_analyzer.find_suspicious_patterns()
     
     # Export du graphe
-    print("\n💾 Export du graphe pour visualisation...")
+    print("\nExport du graphe pour visualisation...")
     graph_analyzer.export_graph_for_visualization(f"{args.output}")
     
     # 5. EXPORT POUR GRAFANA
@@ -146,25 +146,25 @@ def run_batch_analysis(spark, args):
     
     generate_grafana_metrics(kpis, f"{args.output}/metrics")
     
-    print("\n✅ Analyse batch terminée!")
+    print("\nAnalyse batch terminée!")
 
 
 def run_streaming_analysis(spark, args):
     """Exécuter l'analyse streaming"""
     
     print("\n" + "=" * 100)
-    print("🌊 ANALYSE STREAMING")
+    print("ANALYSE STREAMING")
     print("=" * 100)
     
     # Préparer les données de streaming (simuler)
     stream_dir = f"{args.output}/stream_input"
     
-    print("\n📦 Préparation des données de streaming...")
+    print("\nPréparation des données de streaming...")
     print("(Diviser le fichier en chunks pour simuler le streaming)")
     
     import os
     if not os.path.exists(args.data):
-        print(f"❌ Fichier {args.data} introuvable. Téléchargez d'abord les données.")
+        print(f"Fichier {args.data} introuvable. Téléchargez d'abord les données.")
         return
     
     # Créer le répertoire de streaming
@@ -200,13 +200,13 @@ def run_streaming_analysis(spark, args):
     # Écrire en mémoire pour requêtes interactives
     memory_query = streamer.write_to_memory(parsed_stream, "live_logs")
     
-    print("\n✅ Queries de streaming démarrées!")
+    print("\nQueries de streaming démarrées!")
     print("\nQueries actives:")
     for query in spark.streams.active:
         print(f"  - {query.name}: {query.status}")
     
     # Lancer la simulation de streaming dans un thread séparé
-    print("\n🎬 Démarrage de la simulation de streaming...")
+    print("\nDémarrage de la simulation de streaming...")
     print("   (Les chunks seront créés toutes les 10 secondes)")
     
     import threading
@@ -223,14 +223,14 @@ def run_streaming_analysis(spark, args):
     # Arrêter toutes les queries
     streamer.stop_all_queries()
     
-    print("\n✅ Analyse streaming terminée!")
+    print("\nAnalyse streaming terminée!")
 
 
 def run_prometheus_export(spark, args):
     """Exporter les métriques vers Prometheus"""
     
     print("\n" + "=" * 100)
-    print("📡 EXPORT PROMETHEUS")
+    print("EXPORT PROMETHEUS")
     print("=" * 100)
     
     # Parser les logs
@@ -242,7 +242,7 @@ def run_prometheus_export(spark, args):
     exporter.start_server()
     
     # Mettre à jour les métriques
-    print("\n📊 Mise à jour des métriques...")
+    print("\nMise à jour des métriques...")
     exporter.update_metrics_from_dataframe(logs_df)
     
     # Détecter les anomalies et mettre à jour
@@ -250,7 +250,7 @@ def run_prometheus_export(spark, args):
     anomalies = detector.detect_anomalies_kmeans(logs_df, k=args.k_clusters)
     exporter.update_anomaly_metrics(anomalies)
     
-    print("\n✅ Métriques exportées vers Prometheus")
+    print("\nMétriques exportées vers Prometheus")
     print(f"   URL: http://localhost:8000/metrics")
 
 

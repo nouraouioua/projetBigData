@@ -1,4 +1,4 @@
-# 🚀 Grafana Quick Start Guide
+# Grafana Quick Start Guide
 
 ## Problème: "Local mode has been disabled"
 
@@ -6,7 +6,7 @@ Vous avez **3 solutions** pour visualiser vos métriques dans Grafana:
 
 ---
 
-## ✅ Solution 1: Serveur HTTP (Le plus simple)
+## Solution 1: Serveur HTTP (Le plus simple)
 
 ### Étape 1: Démarrer le serveur
 ```bash
@@ -40,7 +40,7 @@ brew services restart grafana
 
 ---
 
-## ✅ Solution 2: Activer le mode local (Permanent)
+## Solution 2: Activer le mode local (Permanent)
 
 ### Étape 1: Éditer la config Grafana
 ```bash
@@ -68,7 +68,7 @@ brew services restart grafana
 
 ---
 
-## ✅ Solution 3: Utiliser JSON API (Alternative)
+## Solution 3: Utiliser JSON API (Alternative)
 
 ### Créer un serveur API simple
 ```bash
@@ -84,7 +84,7 @@ python3 -m http.server 8081
 
 ---
 
-## 📊 Fichiers de métriques disponibles
+## Fichiers de métriques disponibles
 
 ### CSV Files (`/csv/`)
 - `access_per_hour.csv` - Accès par heure
@@ -104,7 +104,7 @@ Mêmes fichiers en format JSON
 
 ---
 
-## 🎨 Exemples de Panels Grafana
+## Exemples de Panels Grafana
 
 ### Panel 1: Trafic par heure
 - **Datasource**: Infinity
@@ -134,7 +134,7 @@ Mêmes fichiers en format JSON
 
 ---
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Le serveur ne démarre pas
 ```bash
@@ -169,6 +169,6 @@ ls -lh output/metrics/json/
 
 ---
 
-## 📚 Documentation complète
+## Documentation complète
 
 Pour plus de détails, voir: `dashboard/GRAFANA_SETUP.md`

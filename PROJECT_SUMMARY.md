@@ -1,48 +1,48 @@
-# 📦 Contenu du Projet - Analyse de Logs Web
+# Contenu du Projet - Analyse de Logs Web
 
-## ✅ Fichiers Créés
+## Fichiers Créés
 
-### 📁 Racine du Projet
-- ✅ `main.py` - Script principal d'exécution
-- ✅ `requirements.txt` - Dépendances Python
-- ✅ `download_data.sh` - Script de téléchargement des données NASA
-- ✅ `run.sh` - Script de lancement automatique
-- ✅ `README.md` - Documentation principale complète
-- ✅ `QUICKSTART.md` - Guide de démarrage rapide
-- ✅ `ARCHITECTURE.md` - Documentation technique détaillée
-- ✅ `LICENSE` - Licence MIT
-- ✅ `.gitignore` - Configuration Git
+### Racine du Projet
+- `main.py` - Script principal d'exécution
+- `requirements.txt` - Dépendances Python
+- `download_data.sh` - Script de téléchargement des données NASA
+- `run.sh` - Script de lancement automatique
+- `README.md` - Documentation principale complète
+- `QUICKSTART.md` - Guide de démarrage rapide
+- `ARCHITECTURE.md` - Documentation technique détaillée
+- `LICENSE` - Licence MIT
+- `.gitignore` - Configuration Git
 
-### 📁 config/
-- ✅ `__init__.py` - Package marker
-- ✅ `spark_config.py` - Configuration Spark centralisée
+### config/
+- `__init__.py` - Package marker
+- `spark_config.py` - Configuration Spark centralisée
 
-### 📁 src/
-- ✅ `__init__.py` - Package marker
-- ✅ `log_parser.py` - Parser de logs Apache avec regex
-- ✅ `sql_analytics.py` - Analyses SQL et KPI
-- ✅ `anomaly_detection.py` - Détection d'anomalies avec MLlib
-- ✅ `graph_analyzer.py` - Analyse de graphe avec GraphX
-- ✅ `log_streamer.py` - Spark Structured Streaming
-- ✅ `metrics_exporter.py` - Export Prometheus/Grafana
+### src/
+- `__init__.py` - Package marker
+- `log_parser.py` - Parser de logs Apache avec regex
+- `sql_analytics.py` - Analyses SQL et KPI
+- `anomaly_detection.py` - Détection d'anomalies avec MLlib
+- `graph_analyzer.py` - Analyse de graphe avec GraphX
+- `log_streamer.py` - Spark Structured Streaming
+- `metrics_exporter.py` - Export Prometheus/Grafana
 
-### 📁 notebooks/
-- ✅ `analysis.ipynb` - Notebook Jupyter interactif complet
+### notebooks/
+- `analysis.ipynb` - Notebook Jupyter interactif complet
 
-### 📁 dashboard/
-- ✅ `GRAFANA_SETUP.md` - Guide d'installation Grafana
-- ✅ `dashboard_template.json` - Template dashboard Grafana
+### dashboard/
+- `GRAFANA_SETUP.md` - Guide d'installation Grafana
+- `dashboard_template.json` - Template dashboard Grafana
 
-### 📁 tests/
-- ✅ `test_log_parser.py` - Tests unitaires
+### tests/
+- `test_log_parser.py` - Tests unitaires
 
-### 📁 data/ (créé, vide initialement)
+### data/ (créé, vide initialement)
 À remplir avec:
 - `NASA_access_log_Jul95` (via download_data.sh)
 - `NASA_access_log_Aug95` (via download_data.sh)
 - `NASA_access_log_full.txt` (généré automatiquement)
 
-### 📁 output/ (créé, vide initialement)
+### output/ (créé, vide initialement)
 Sera rempli après exécution avec:
 - `parquet/` - Tous les KPI
 - `metrics/` - Exports Grafana
@@ -51,15 +51,15 @@ Sera rempli après exécution avec:
 - `checkpoints/` - Streaming
 - `streaming_metrics/` - Métriques temps réel
 
-## 🎯 Fonctionnalités Implémentées
+## Fonctionnalités Implémentées
 
-### ✅ 1. Parsing Avancé
+### 1. Parsing Avancé
 - Regex complexe pour logs Apache
 - Extraction: IP, date, URL, méthode, status, bytes
 - Validation et nettoyage
 - Enrichissement avec features dérivées
 
-### ✅ 2. SQL Analytics
+### 2. SQL Analytics
 - Accès par heure/minute
 - Top 20 URLs
 - Top 20 IPs
@@ -68,15 +68,15 @@ Sera rempli après exécution avec:
 - Détection des pics d'activité
 - Volume de trafic temporel
 
-### ✅ 3. Machine Learning (MLlib)
+### 3. Machine Learning (MLlib)
 - K-Means clustering (k configurable)
 - Détection statistique (Z-score)
 - Feature engineering avancé
 - Identification IPs suspectes
 - Analyse comportementale
 
-### ✅ 4. Analyse de Graphe (GraphX/GraphFrames)
-- Graphe biparti IP ↔ URL
+### 4. Analyse de Graphe (GraphX/GraphFrames)
+- Graphe biparti IP <-> URL
 - Out-degree (connectivité IPs)
 - In-degree (popularité URLs)
 - Community detection (Label Propagation)
@@ -84,7 +84,7 @@ Sera rempli après exécution avec:
 - Patterns suspects
 - Export pour visualisation externe
 
-### ✅ 5. Spark Streaming
+### 5. Spark Streaming
 - Structured Streaming
 - Simulation temps réel (chunks 10s)
 - Agrégations par fenêtre
@@ -92,14 +92,14 @@ Sera rempli après exécution avec:
 - Checkpointing
 - Watermarking
 
-### ✅ 6. Export et Visualisation
+### 6. Export et Visualisation
 - Export Parquet (optimisé Spark)
 - Export JSON (Grafana JSON API)
 - Export CSV (Grafana CSV plugin)
 - Prometheus metrics (temps réel)
 - Dashboard Grafana complet
 
-### ✅ 7. Dashboard Grafana
+### 7. Dashboard Grafana
 Panels implémentés:
 - Access count per minute (Time Series)
 - Total requests (Stat)
@@ -109,7 +109,7 @@ Panels implémentés:
 - Top URLs (Table)
 - Suspicious IPs (Table avec highlights)
 
-## 📊 KPI Générés
+## KPI Générés
 
 ### Métriques SQL
 1. `access_per_hour` - Accès agrégés par heure
@@ -132,7 +132,7 @@ Panels implémentés:
 14. `communities` - Communautés détectées
 15. `suspicious_patterns` - Patterns d'accès suspects
 
-## 🚀 Modes d'Exécution
+## Modes d'Exécution
 
 ### 1. Mode Complet (Recommandé)
 ```bash
@@ -172,7 +172,7 @@ jupyter notebook notebooks/analysis.ipynb
 ```
 Analyse interactive
 
-## 📈 Pipeline Complet
+## Pipeline Complet
 
 ```
 Télécharger Données (download_data.sh)
@@ -193,7 +193,7 @@ Résultats dans output/
 Visualisation Grafana (optionnel)
 ```
 
-## 🛠️ Technologies Utilisées
+## Technologies Utilisées
 
 ### Core
 - Apache Spark 3.5.0
@@ -213,7 +213,7 @@ Visualisation Grafana (optionnel)
 - Pandas (pour visualisations)
 - Matplotlib & Seaborn (graphiques)
 
-## 📝 Documentation
+## Documentation
 
 ### Guides Utilisateur
 - `README.md` - Vue d'ensemble et utilisation
@@ -225,41 +225,41 @@ Visualisation Grafana (optionnel)
 - Code docstrings - Documentation inline dans le code
 - `notebooks/analysis.ipynb` - Exemples d'utilisation
 
-## 🎓 Concepts Big Data Couverts
+## Concepts Big Data Couverts
 
 ### Apache Spark
-✅ Spark Core (RDD, transformations, actions)
-✅ Spark SQL (DataFrames, SQL queries, window functions)
-✅ Spark MLlib (clustering, pipelines, feature engineering)
-✅ GraphX/GraphFrames (graph analytics, algorithms)
-✅ Structured Streaming (micro-batch, watermarks)
+[OK] Spark Core (RDD, transformations, actions)
+[OK] Spark SQL (DataFrames, SQL queries, window functions)
+[OK] Spark MLlib (clustering, pipelines, feature engineering)
+[OK] GraphX/GraphFrames (graph analytics, algorithms)
+[OK] Structured Streaming (micro-batch, watermarks)
 
 ### Data Engineering
-✅ ETL Pipeline (Extract, Transform, Load)
-✅ Data cleaning et validation
-✅ Feature engineering
-✅ Partitioning et optimization
-✅ Caching strategies
+[OK] ETL Pipeline (Extract, Transform, Load)
+[OK] Data cleaning et validation
+[OK] Feature engineering
+[OK] Partitioning et optimization
+[OK] Caching strategies
 
 ### Machine Learning
-✅ Unsupervised learning (K-Means)
-✅ Anomaly detection (clustering + statistical)
-✅ Feature scaling (StandardScaler)
-✅ Model evaluation
+[OK] Unsupervised learning (K-Means)
+[OK] Anomaly detection (clustering + statistical)
+[OK] Feature scaling (StandardScaler)
+[OK] Model evaluation
 
 ### Graph Theory
-✅ Bipartite graphs
-✅ Degree centrality
-✅ Community detection
-✅ Pattern mining
+[OK] Bipartite graphs
+[OK] Degree centrality
+[OK] Community detection
+[OK] Pattern mining
 
 ### DevOps
-✅ Monitoring (Prometheus)
-✅ Visualization (Grafana)
-✅ Automation scripts
-✅ Testing
+[OK] Monitoring (Prometheus)
+[OK] Visualization (Grafana)
+[OK] Automation scripts
+[OK] Testing
 
-## 💡 Points Forts du Projet
+## Points Forts du Projet
 
 1. **Complet** - Couvre toute la stack Spark
 2. **Production-ready** - Code structuré et documenté
@@ -272,33 +272,33 @@ Visualisation Grafana (optionnel)
 9. **Testé** - Tests unitaires inclus
 10. **Open Source** - Licence MIT
 
-## 🎯 Objectifs Atteints
+## Objectifs Atteints
 
-✅ Parsing avancé de logs Apache
-✅ SQL analytiques avec KPI variés
-✅ MLlib pour détection d'anomalies
-✅ GraphX pour analyse de relations
-✅ Streaming temps réel simulé
-✅ Dashboard Grafana opérationnel
-✅ Documentation exhaustive
-✅ Code production-ready
-✅ Architecture modulaire
-✅ Optimisations performance
+[OK] Parsing avancé de logs Apache
+[OK] SQL analytiques avec KPI variés
+[OK] MLlib pour détection d'anomalies
+[OK] GraphX pour analyse de relations
+[OK] Streaming temps réel simulé
+[OK] Dashboard Grafana opérationnel
+[OK] Documentation exhaustive
+[OK] Code production-ready
+[OK] Architecture modulaire
+[OK] Optimisations performance
 
-## 📦 Livrables
+## Livrables
 
-1. ✅ Code source complet et commenté
-2. ✅ Configuration Spark optimisée
-3. ✅ Scripts d'automatisation
-4. ✅ Notebook Jupyter interactif
-5. ✅ Dashboard Grafana template
-6. ✅ Documentation multi-niveaux
-7. ✅ Tests unitaires
-8. ✅ Guide de démarrage rapide
-9. ✅ Architecture technique
-10. ✅ Fichier de dépendances
+1. Code source complet et commenté
+2. Configuration Spark optimisée
+3. Scripts d'automatisation
+4. Notebook Jupyter interactif
+5. Dashboard Grafana template
+6. Documentation multi-niveaux
+7. Tests unitaires
+8. Guide de démarrage rapide
+9. Architecture technique
+10. Fichier de dépendances
 
-## 🚀 Pour Commencer
+## Pour Commencer
 
 ```bash
 # 1. Télécharger les données
@@ -325,7 +325,7 @@ chmod +x run.sh
 
 ---
 
-**✨ Projet prêt à l'emploi pour l'analyse de logs web à grande échelle!**
+**Projet prêt à l'emploi pour l'analyse de logs web à grande échelle!**
 
 Total fichiers créés: **25+**
 Total lignes de code: **~3000+**

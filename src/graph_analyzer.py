@@ -22,7 +22,7 @@ class GraphAnalyzer:
         Vertices: IPs et URLs
         Edges: Connexions IP → URL avec poids = nombre de requêtes
         """
-        print("\n🕸️  CONSTRUCTION DU GRAPHE IP ↔ URL")
+        print("\nCONSTRUCTION DU GRAPHE IP <-> URL")
         print("=" * 100)
         
         # Créer les vertices pour les IPs
@@ -40,7 +40,7 @@ class GraphAnalyzer:
         # Combiner tous les vertices
         vertices = ip_vertices.union(url_vertices)
         
-        print(f"✅ Vertices créés: {vertices.count()}")
+        print(f"Vertices créés: {vertices.count()}")
         print(f"   - IPs: {ip_vertices.count()}")
         print(f"   - URLs: {url_vertices.count()}")
         
@@ -57,12 +57,12 @@ class GraphAnalyzer:
             'error_count'
         )
         
-        print(f"✅ Edges créés: {edges.count()}")
+        print(f"Edges créés: {edges.count()}")
         
         # Créer le GraphFrame
         self.graph = GraphFrame(vertices, edges)
         
-        print("\n📊 STATISTIQUES DU GRAPHE")
+        print("\nSTATISTIQUES DU GRAPHE")
         print("=" * 80)
         print(f"Nombre de vertices: {self.graph.vertices.count()}")
         print(f"Nombre d'edges: {self.graph.edges.count()}")
@@ -77,7 +77,7 @@ class GraphAnalyzer:
         if self.graph is None:
             raise ValueError("Le graphe n'a pas été construit. Appelez build_ip_url_graph d'abord.")
         
-        print("\n🔗 ANALYSE DE CONNECTIVITÉ DES IPs")
+        print("\nANALYSE DE CONNECTIVITÉ DES IPs")
         print("=" * 100)
         
         # Out-degree des IPs (nombre d'URLs visitées)
@@ -96,7 +96,7 @@ class GraphAnalyzer:
         ip_analysis = ip_out_degrees.join(ip_stats, 'ip') \
             .orderBy(desc('urls_visited'))
         
-        print(f"\n📊 TOP {top_n} IPs PAR NOMBRE D'URLs VISITÉES")
+        print(f"\nTOP {top_n} IPs PAR NOMBRE D'URLs VISITÉES")
         ip_analysis.show(top_n, truncate=False)
         
         return ip_analysis
@@ -109,7 +109,7 @@ class GraphAnalyzer:
         if self.graph is None:
             raise ValueError("Le graphe n'a pas été construit.")
         
-        print("\n⭐ ANALYSE DE POPULARITÉ DES URLs")
+        print("\nANALYSE DE POPULARITÉ DES URLs")
         print("=" * 100)
         
         # In-degree des URLs (nombre d'IPs visiteurs)
@@ -127,7 +127,7 @@ class GraphAnalyzer:
         url_analysis = url_in_degrees.join(url_stats, 'url') \
             .orderBy(desc('unique_visitors'))
         
-        print(f"\n📊 TOP {top_n} URLs PAR NOMBRE DE VISITEURS UNIQUES")
+        print(f"\nTOP {top_n} URLs PAR NOMBRE DE VISITEURS UNIQUES")
         url_analysis.show(top_n, truncate=False)
         
         return url_analysis
@@ -140,7 +140,7 @@ class GraphAnalyzer:
         if self.graph is None:
             raise ValueError("Le graphe n'a pas été construit.")
         
-        print("\n👥 DÉTECTION DE COMMUNAUTÉS (Label Propagation)")
+        print("\nDÉTECTION DE COMMUNAUTÉS (Label Propagation)")
         print("=" * 100)
         
         # Appliquer Label Propagation Algorithm
@@ -153,11 +153,11 @@ class GraphAnalyzer:
             F.sum(F.when(col('type') == 'url', 1).otherwise(0)).alias('url_count')
         ).orderBy(desc('size'))
         
-        print("\n📊 DISTRIBUTION DES COMMUNAUTÉS")
+        print("\nDISTRIBUTION DES COMMUNAUTÉS")
         community_sizes.show(20)
         
         # Afficher quelques exemples de chaque communauté
-        print("\n🔍 EXEMPLES PAR COMMUNAUTÉ")
+        print("\nEXEMPLES PAR COMMUNAUTÉ")
         for row in community_sizes.limit(5).collect():
             label = row['label']
             print(f"\n--- Communauté {label} (taille: {row['size']}) ---")
@@ -174,7 +174,7 @@ class GraphAnalyzer:
         if self.graph is None:
             raise ValueError("Le graphe n'a pas été construit.")
         
-        print("\n🔗 COMPOSANTES CONNEXES")
+        print("\nCOMPOSANTES CONNEXES")
         print("=" * 100)
         
         components = self.graph.connectedComponents()
@@ -184,7 +184,7 @@ class GraphAnalyzer:
             count('*').alias('size')
         ).orderBy(desc('size'))
         
-        print("\n📊 DISTRIBUTION DES COMPOSANTES")
+        print("\nDISTRIBUTION DES COMPOSANTES")
         component_sizes.show(20)
         
         return components
@@ -199,7 +199,7 @@ class GraphAnalyzer:
         if self.graph is None:
             raise ValueError("Le graphe n'a pas été construit.")
         
-        print("\n🚨 PATTERNS SUSPECTS DÉTECTÉS")
+        print("\nPATTERNS SUSPECTS DÉTECTÉS")
         print("=" * 100)
         
         # Analyser les edges avec beaucoup d'erreurs
@@ -212,7 +212,7 @@ class GraphAnalyzer:
             col('error_rate') > 0.5  # Plus de 50% d'erreurs
         ).orderBy(desc('error_count'))
         
-        print("\n❌ CONNEXIONS AVEC TAUX D'ERREUR ÉLEVÉ")
+        print("\nCONNEXIONS AVEC TAUX D'ERREUR ÉLEVÉ")
         high_error_edges.show(20, truncate=False)
         
         # IPs générant beaucoup d'erreurs
@@ -226,7 +226,7 @@ class GraphAnalyzer:
             (col('total_errors') > 10) & (col('error_rate') > 0.3)
         ).orderBy(desc('total_errors'))
         
-        print("\n⚠️  IPs AVEC BEAUCOUP D'ERREURS")
+        print("\nIPs AVEC BEAUCOUP D'ERREURS")
         error_ips.show(20, truncate=False)
         
         return high_error_edges
@@ -245,7 +245,7 @@ class GraphAnalyzer:
             .orderBy(desc('visit_count')) \
             .limit(limit)
         
-        print(f"\n🌐 URLs visitées par {ip_address}")
+        print(f"\nURLs visitées par {ip_address}")
         print("=" * 100)
         neighbors.show(limit, truncate=False)
         
@@ -266,6 +266,6 @@ class GraphAnalyzer:
         edges_path = f"{output_dir}/graph_edges"
         self.graph.edges.write.mode('overwrite').csv(edges_path, header=True)
         
-        print(f"\n✅ Graphe exporté:")
+        print(f"\nGraphe exporté:")
         print(f"   - Vertices: {vertices_path}")
         print(f"   - Edges: {edges_path}")

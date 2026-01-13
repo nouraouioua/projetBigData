@@ -32,7 +32,7 @@ class SQLAnalytics:
             ) \
             .orderBy('date', 'hour')
         
-        print("\n📊 ACCÈS PAR HEURE")
+        print("\nACCÈS PAR HEURE")
         print("=" * 100)
         result.show(24)
         
@@ -62,7 +62,7 @@ class SQLAnalytics:
             .orderBy(desc('hit_count')) \
             .limit(top_n)
         
-        print(f"\n🔝 TOP {top_n} URLs")
+        print(f"\nTOP {top_n} URLs")
         print("=" * 100)
         result.show(top_n, truncate=False)
         
@@ -83,7 +83,7 @@ class SQLAnalytics:
             .orderBy(desc('request_count')) \
             .limit(top_n)
         
-        print(f"\n🌐 TOP {top_n} IPs")
+        print(f"\nTOP {top_n} IPs")
         print("=" * 100)
         result.show(top_n, truncate=False)
         
@@ -95,7 +95,7 @@ class SQLAnalytics:
             .agg(count('*').alias('count')) \
             .orderBy('status')
         
-        print("\n📈 DISTRIBUTION DES CODES HTTP")
+        print("\nDISTRIBUTION DES CODES HTTP")
         print("=" * 80)
         result.show(50)
         
@@ -104,7 +104,7 @@ class SQLAnalytics:
             .agg(count('*').alias('count')) \
             .orderBy(desc('count'))
         
-        print("\n📊 RÉSUMÉ PAR CATÉGORIE")
+        print("\nRÉSUMÉ PAR CATÉGORIE")
         print("=" * 80)
         summary.show()
         
@@ -121,7 +121,7 @@ class SQLAnalytics:
             ) \
             .orderBy(desc('error_count'))
         
-        print("\n❌ ANALYSE DES ERREURS")
+        print("\nANALYSE DES ERREURS")
         print("=" * 100)
         result.show(20, truncate=False)
         
@@ -162,7 +162,7 @@ class SQLAnalytics:
         peaks = per_minute.filter(col('access_count') > threshold) \
             .orderBy(desc('access_count'))
         
-        print(f"\n⚡ PICS D'ACTIVITÉ (seuil: {threshold:.0f} requêtes/minute)")
+        print(f"\nPICS D'ACTIVITÉ (seuil: {threshold:.0f} requêtes/minute)")
         print("=" * 80)
         peaks.show(20)
         
@@ -192,4 +192,4 @@ class SQLAnalytics:
         for name, df in kpis.items():
             output_path = f"{output_dir}/{name}"
             df.write.mode('overwrite').parquet(output_path)
-            print(f"✅ Sauvegardé: {output_path}")
+            print(f"Sauvegardé: {output_path}")
